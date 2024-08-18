@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Produtos from './Components/Produtos';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Contato from './Components/Contato';
+import Produto from './Components/Produto';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Utilize a API abaixo para puxar a lista de produto
+// https://ranekapi.origamid.dev/json/api/produto
+// Cada produto possui o id, o mesmo pode ser passado na api para retornar os dados desse produto específico
+// https://ranekapi.origamid.dev/json/api/produto/notebook
+// URL da API
 
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='App'>
+      <BrowserRouter>
+      <Header />
+      <div className='content'>
+        <Routes>
+          <Route path='/' element={<Produtos />} />
+          <Route path='produto/:id' element={<Produto />} />
+          <Route path='contato' element={<Contato />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        <Footer />
+      </BrowserRouter>
+    </div>
   )
-}
+};
 
-export default App
+export default App;
